@@ -19,13 +19,13 @@ It is *highly* recommended that you install pipsi_ for *any* Python command line
 
 .. code-block:: bash
 
-    $ pipsi install github_macros
+    $ pipsi install github-macros
 
 If you receive an error on this, perhaps the package was already installed
 
 .. code-block:: bash
 
-    $ pipsi upgrade github_macros
+    $ pipsi upgrade github-macros
 
 GitHub Token
 ------------
