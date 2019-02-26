@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "github-macros"
+version = "2.0.0"
+description = ""
+authors = ["David Alexander <opensource@thelonelyghost.com>"]
+license = "BSD-3-Clause"
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.5",
+    "Topic :: Desktop Environment",
+    "Topic :: Internet",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Build Tools"
+]
+
+[tool.poetry.dependencies]
+python = "^3.5"
+requests = "^2.21.0"
+python-dateutil = "^2.8.0"
+sh = "^1.12.14"
+
+[tool.poetry.dev-dependencies]
+pytest = "^4.3.0"
+pytest-cov = "^2.6.1"
+better-exceptions = "*"
+
+[tool.poetry.scripts]
+gh-refresh = "github_macros.cli.refresh:main"
+gh-protect = "github_macros.cli.branch_protection:main"
+gh-permit = "github_macros.cli.repo_permissions:main"
+gh-releases = "github_macros.cli.releases:main"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
