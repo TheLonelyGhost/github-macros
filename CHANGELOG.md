@@ -3,6 +3,15 @@
 We follow [Semantic Versioning](http://semver.org/) as a way of measuring stability of an update. This
 means we will never make a backwards-incompatible change within a major version of the project.
 
+## v2.1.0 (2019-03-03)
+
+- Adds `--log-level` option to `gh-releases` to make debugging the tag-matching regex a bit easier
+- Reason for filtering out a given tag is given when loggins is set to DEBUG
+- Reduces number of API calls since release assets are already bundled in the original response
+- Replaces `print()` with writes to stdout and stderr (where stdout is always programmatically consumable)
+- Options to allow matches for RC (`--rc`), Alpha (`--alpha`), and Beta (`--beta`) releases (default: none allowed)
+- Option to print source code snapshots at the given release as if it is an attached asset
+
 ## v2.0.0 (2019-02-26)
 
 - Public release of previously closed-source application (renamed to `github_macros` to work with PyPi)
