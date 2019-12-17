@@ -4,8 +4,8 @@ from github_macros.cli._base import MyParser, create_client
 from github_macros.models.github import GithubOrganization, GithubUser
 from github_macros import __version__
 
-from sh.contrib import git as git_cmd
-import sh
+from sh.contrib import git as git_cmd  # type: ignore
+import sh  # type: ignore
 
 
 def git(*args, **kwargs):

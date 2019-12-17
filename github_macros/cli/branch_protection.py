@@ -1,9 +1,16 @@
 import os
 import sys
 
+from typing import Iterable, List, Optional
+
 from github_macros.cli._base import MyParser, create_client
 from github_macros.models.github import GithubOrganization, GithubUser, GithubRepository
 from github_macros import __version__
+
+
+def error(repo, branch, option_name):
+    msg = "ERROR:: {repo} @ {branch} => {opt}\n"
+    sys.stderr.write(msg.format(repo=repo.full_name, branch=branch.name, opt=option_name))
 
 
 def get_args():
@@ -95,8 +102,8 @@ def get_args():
     return p.parse_args()
 
 
-def index_repos(client, repo_names=None, org_names=None, usernames=None):
-    repositories = []
+def index_repos(client, repo_names: Optional[List[str]] = None, org_names: Optional[List[str]] = None, usernames: Optional[List[str]] = None) -> Iterable[GithubRepository]:
+    repositories: List[GithubRepository] = []
     for org_name in (org_names if org_names else []):
         # org.repositories is a lazy-loaded item, so we don't need to fetch all the info on the org
         org = GithubOrganization(client, org_name)
@@ -113,21 +120,14 @@ def index_repos(client, repo_names=None, org_names=None, usernames=None):
     return set(repositories)
 
 
-def error(repo, branch, option_name):
-    msg = "ERROR:: {repo} @ {branch} => {opt}\n"
-    sys.stderr.write(msg.format(repo=repo.full_name, branch=branch.name, opt=option_name))
-
-
 def main():
     opt = get_args()
     client = create_client(username=opt.gh_user, token=opt.gh_token)
 
-    # collecting repo objects for all the things
-    repositories = index_repos(client=client, repo_names=opt.repositories,
-                               org_names=opt.organizations, usernames=opt.users)
     all_errors = 0
+    for repo in index_repos(client=client, repo_names=opt.repositories,
+                            org_names=opt.organizations, usernames=opt.users):
 
-    for repo in repositories:
         # print('REPO: {name}'.format(name=str(repo.full_name)))
         repo.refresh()
         repo_errors = 0
