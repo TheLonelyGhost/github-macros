@@ -16,7 +16,7 @@ class GithubHttp(requests.Session):
         else:
             self.base_uri = 'https://{domain}/api/v3'.format(domain=os.getenv('GITHUB_DOMAIN'))
         self.auth = (username, token)
-        self.headers.update({'Accept': 'application/vnd.github.loki-preview+json',
+        self.headers.update({'Accept': 'application/vnd.github.luke-cage-preview+json',
                              'Content-Type': 'application/json',
                              'User-Agent': 'David Alexander: "Too lazy... Just script it..."'})
 
